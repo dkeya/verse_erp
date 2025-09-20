@@ -23,6 +23,13 @@ from contextlib import contextmanager
 import json
 import shutil
 from pathlib import Path
+import streamlit as st
+
+st.set_page_config(
+    page_title="Verse – Claims Intelligence Platform",
+    page_icon="📊",  # or your custom logo emoji
+    layout="wide"
+)
 
 # Load environment variables
 load_dotenv()
