@@ -1,0 +1,17 @@
+{
+  "tenants": {
+    "c001": {
+      "name": "Cinta",
+      "admin_email": "info@cintabeauty.co.ke",
+      "created_at": "2025-09-20T13:45:53.582380",
+      "status": "active",
+      "subscription": {
+        "plan": "enterprise",
+        "billing_cycle": "monthly",
+        "status": "trial",
+        "trial_end": "2025-10-04T13:45:53.582380",
+        "api_key": null
+      }
+    }
+  }
+}
