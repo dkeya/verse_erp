@@ -9,4 +9,3 @@ python-dotenv>=1.0
 statsmodels>=0.14
 fpdf2>=2.7
 plotly>=5.20
-streamlit-searchbox>=0.3.4

@@ -17,13 +17,11 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from fpdf import FPDF
 import plotly.express as px
-from streamlit_searchbox import st_searchbox
 from typing import Dict, Optional, List, Any, Union, Tuple
 from contextlib import contextmanager
 import json
 import shutil
 from pathlib import Path
-import streamlit as st
 
 st.set_page_config(
     page_title="Verse – Claims Intelligence Platform",
@@ -1515,14 +1513,20 @@ def sales_marketing(submenu: Optional[str] = None) -> None:
 
         st.subheader("Track Customer Interactions")
         if not crm_df.empty:
-            def search_customers(search_term: str) -> List[str]:
-                return crm_df[crm_df["Customer Display"].str.contains(search_term, case=False)]["Customer Display"].tolist()
+            # Simple built-in search (no extra package needed)
+            search_term = st.text_input("Search by Customer ID or Phone", placeholder="e.g. C001 or 0712...")
+            filtered = crm_df[
+                crm_df["Customer Display"].str.contains(search_term, case=False, na=False)
+            ] if search_term else crm_df
 
-            customer_display = st_searchbox(
-                search_customers,
-                placeholder="Search by Customer ID or Phone",
-                label="Select Customer"
-            )
+            customer_display = None
+            if not filtered.empty:
+                customer_display = st.selectbox(
+                    "Select Customer",
+                    filtered["Customer Display"].tolist()
+                )
+            else:
+                st.info("No matching customers.")
 
             if customer_display:
                 customer_id = customer_display.split(" - ")[0]
